@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "pemilihan2percobaan312",
+            "request": "launch",
+            "mainClass": "pemilihan2percobaan312",
+            "projectName": "ProjectAkhirDaspro_66e8eac0"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
