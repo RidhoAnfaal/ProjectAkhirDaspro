@@ -1,8 +1,5 @@
 import java.util.Scanner;
 public class pemilihan2percobaan312 {
-    /**
-     * @param args
-     */
     public static void main(String[] args){
     Scanner input18 = new Scanner (System.in);
     String category;
@@ -33,6 +30,5 @@ public class pemilihan2percobaan312 {
         System.out.println("net salary" + netsalary);
     } else 
     System.out.println("invalid category");
-
     }
 }
