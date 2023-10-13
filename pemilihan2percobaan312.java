@@ -30,5 +30,6 @@ public class pemilihan2percobaan312 {
         System.out.println("net salary" + netsalary);
     } else 
     System.out.println("invalid category");
+    
     }
 }
