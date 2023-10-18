@@ -111,24 +111,32 @@ public class ProjekAkhir {
                     if (inputBalance) {
                         remainingdebt = loanAmount - remainingBalance;
                         monthlyInterest = loanTerm * interest * remainingdebt;
-                        System.out.println("\n-- Dear "+cName);
-                        String y = kursIndonesia.format(monthlyInterest);
-                        System.out.println("Your interest per month: "+y);
-                        totalDebttobePaid = monthlyInterest + remainingdebt;
-                        monthlyInstallments = totalDebttobePaid / loanTerm;
+                         totalDebttobePaid = monthlyInterest + remainingdebt;
+                        monthlyInstallments = totalDebttobePaid / loanTerm; 
                         String x = kursIndonesia.format(monthlyInstallments);
-                        System.out.println("The bill you have to pay per month amounts to: "+x);
+                         String y = kursIndonesia.format(monthlyInterest);
+                         System.out.println("\r\n" + //
+                                 " ======================================================================= \r\n" + //
+                                 "                              Dear "  +cName                     +"\r\n" + //
+                                 " ======================================================================= \r\n" + //
+                                 "  Your interest per month "  +y                        +"\r\n" + //
+                                 "  The bill you have to pay per month amounts to " +x  +"\r\n" + //
+                                 " ======================================================================= ");
                         System.out.println(" - THANK YOU -\n");  
                     } else {
                         remainingdebt = loanAmount - 0;
                         monthlyInterest = loanTerm * interest * remainingdebt;
-                        System.out.println("\n-- Dear "+cName);
-                        String y = kursIndonesia.format(monthlyInterest);
-                        System.out.println("Your interest per month: "+y);
                         totalDebttobePaid = monthlyInterest + remainingdebt;
                         monthlyInstallments = totalDebttobePaid / loanTerm;
-                        String x = kursIndonesia.format(monthlyInstallments);
-                        System.out.println("The bill you have to pay per month amounts to: "+x);
+                        String x = kursIndonesia.format(monthlyInstallments);   
+                        String y = kursIndonesia.format(monthlyInterest);
+                          System.out.println("\r\n" + //
+                                 " ======================================================================= \r\n" + //
+                                 "                               Dear "  +cName                     +"\r\n" + //
+                                 " ======================================================================= \r\n" + //
+                                 "  Your interest per month "  +y                        +"\r\n" + //
+                                 "  The bill you have to pay per month amounts to " +x  +"\r\n" + //
+                                 " ======================================================================= ");
                         System.out.println(" - THANK YOU -\n");  
                     }
                     break;
@@ -139,6 +147,15 @@ public class ProjekAkhir {
 
                     System.out.println("\n-- LOAN REPAYMENT --\n");
                     System.out.println("Dear "+cName);
+                    System.out.println("\r\n" + //
+                            " ====================================================================== \r\n" + //
+                            "                         Dear" +cName                 +"\r\n" + //
+                            " ====================================================================== \r\n" + //
+                            "  The loan amount you have to pay is:" +a                 +"\r\n" + //
+                            "  The loan amount you are required to pay monthly is:" +x +"\r\n" + //
+                            " ====================================================================== \r\n" + //
+                            "\r\n" + //
+                            "");
                     System.out.println("The loan amount you have to pay is: "+a);
                     System.out.println("The loan amount you are required to pay monthly is: "+x);
                     System.out.println("\n# If you want to repay the loan, you will have to pay the monthly installments set when you applied for the loan #");
@@ -147,6 +164,12 @@ public class ProjekAkhir {
                     remainingInstallments = totalDebttobePaid - (monthlyInstallments * month);
                     String c = kursIndonesia.format(remainingInstallments);
                     System.out.println("    # Your installment payment has been received #");
+                    System.out.println("\r\n" + //
+                            " =================================================================================== \r\n" + //
+                            " "+cName  +" The remaining loan that you have to pay now is:" +c  +"\r\n" + //
+                            " =================================================================================== \r\n" + //
+                            "\r\n" + //
+                            "");
                     System.out.println(cName +" The remaining loan that you have to pay now is: "+c);
                     System.out.println("-- THANK YOU FOR PAYING THE INSTALLMENT --\n");
                     break;
