@@ -38,7 +38,12 @@ public class ProjekAkhir {
         //title end
 
         //register
-        System.out.println("----- PLEASE REGISTER FIRST -----\n");
+        System.out.println("\r\n" + //
+                "╔════════════════════════╗\r\n" + //
+                "║ PLEASE REGISTER FIRST  ║\r\n" + //
+                "╚════════════════════════╝\r\n" + //
+                "\r" + //
+                "");
         System.out.print("Enter full name: ");
         name = input.nextLine();
         System.out.print("Gender (Male:1,Female0): ");
@@ -54,14 +59,29 @@ public class ProjekAkhir {
         job = input.next();
         System.out.print("Address: ");
         address = input.next();
-        System.out.println("\n-- REGISTRATION SUCCESSFUL --\n");
+        System.out.println("\r\n" + //
+                "           ID CARD         \r\n" + //
+                " ========================== \r\n" + //
+                "  Name    \t" +name        +"\r\n" + //
+                "  Age     \t" +age         +"\r\n" + //
+                "  Job     \t" +job         +"\r\n" + //
+                "  Address \t" +address     +"\r\n" + //
+                " ==========================");
+        System.out.println("== REGISTRATION SUCCESSFUL ==\n");
         //register end
 
         //menu selection
         do {
-            System.out.println("----- PLEASE CHOOSE MENU: -----");
-            System.out.println("|\n|    1. Balance\n|    2. Loan application\n|    3. Loan repayment\n|    0. Exit\n-------------------------------");
-            System.out.print("-- Choose the number: ");
+            System.out.println("\r\n" + //
+                    "+---------------------+\r\n" + //
+                    "| PLEASE CHOOSE MENU  |\r\n" + //
+                    "+---------------------+\r\n" + //
+                    "| 1. Balance          |\r\n" + //
+                    "| 2. Loan application |\r\n" + //
+                    "| 3. Loan repayment   |\r\n" + //
+                    "| 0. Exit             |\r\n" + //
+                    "+---------------------+");
+            System.out.print("=== Choose the number: ");
             menu = input.nextInt();
 
             switch (menu) {
@@ -139,6 +159,7 @@ public class ProjekAkhir {
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
+            //menu selection end
         } while (menu != 0);
 
     }
