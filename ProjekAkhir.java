@@ -90,7 +90,7 @@ public class ProjekAkhir {
                     System.out.print("Do you want to enter the balance? (true/false): ");
                     inputBalance = input.nextBoolean();
                     if (inputBalance) {
-                        System.out.print("The balance amount you want to input (fill in 0 if you choose not to enter the balance or choose 0): Rp.");
+                        System.out.print("The balance amount you want to input: Rp.");
                         remainingBalance = input.nextDouble();
                         System.out.println(cName + " your balance entry request has been submitted");
                     }
@@ -105,9 +105,11 @@ public class ProjekAkhir {
                     loanTerm = input.nextInt();
                     System.out.print("Are you willing to bear the cost of repaying the loan at 5% interest per year? (1/0): ");
                     approval = input.nextInt();
-                    if (approval == 1) {
+                    if (approval == 0) {
+                        continue;
+                    }else if (approval == 1) {
                         System.out.println("\n# LOAN REQUEST APPROVED #\n");
-                    }
+                    
                     if (inputBalance) {
                         remainingdebt = loanAmount - remainingBalance;
                         monthlyInterest = loanTerm * interest * remainingdebt;
@@ -138,6 +140,7 @@ public class ProjekAkhir {
                                  "  The bill you have to pay per month amounts to " +x  +"\r\n" + //
                                  " ======================================================================= ");
                         System.out.println(" - THANK YOU -\n");  
+                    }
                     }
                     break;
 
@@ -179,7 +182,7 @@ public class ProjekAkhir {
                     break;
                     
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Invalid choice. Please try again");
                     break;
             }
             //menu selection end
