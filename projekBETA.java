@@ -48,10 +48,17 @@ public class projekBETA {
                     name = input.next();
                     System.out.print("Enter your age: ");
                     age = input.nextInt();
+
+                    if (age < 18) {
+                        System.out.println("You are not old enough!");
+                        break;
+                    }
+
                     System.out.print("Enter your gender (male:1, female:0): ");
                     genderBolean = input.nextInt();
                     System.out.print("Enter your phone number: ");
                     phonenumber = input.next();
+
                     System.out.print("Enter your address: ");
                     address = input.next();
 
@@ -244,7 +251,7 @@ public class projekBETA {
                         System.out.print("How many months do you want to pay monthly installments: ");
                         double loanRepayment = input.nextDouble();
 
-                        remainingInstallmentsArray[index] = totalDebttobePaidArray[i]
+                        remainingInstallmentsArray[i] = totalDebttobePaidArray[i]
                                 - loanRepayment;
                         // index++;
 
@@ -253,14 +260,14 @@ public class projekBETA {
                                 " =================================================================================== \r\n"
                                 + //
                                 "  The remaining loan that you have to pay now is:"
-                                + formatRupiah.format(remainingInstallmentsArray[index]) + "\r\n" + //
+                                + formatRupiah.format(remainingInstallmentsArray[i]) + "\r\n" + //
                                 " =================================================================================== \r\n"
                                 + //
                                 "\r\n" + //
                                 "");
                         System.out.println("== THANK YOU FOR PAYING THE INSTALLMENT ==\n");
                     }
-                    index++;
+                    // index++;
                     break;
 
                 // BALANCE CHECHK
@@ -272,7 +279,7 @@ public class projekBETA {
                             "" + //
                             "");
 
-                    for (int i = 1; i < index; i++) {
+                    for (int i = 0; i < index; i++) {
                         System.out.println("" + //
                                 " ========================================= \r\n" + //
                                 "  Account balance:" + formatRupiah.format(balanceArray[i]) + "\r\n" + //
@@ -296,7 +303,7 @@ public class projekBETA {
                     System.out.print("Enter the amount of money you want to withdraw: Rp");
                     double withdrawalAmount = input.nextDouble();
 
-                    for (int i = 1; i < index; i++) {
+                    for (int i = 0; i < index; i++) {
                         if (balanceArray[i] >= withdrawalAmount) {
                             balanceArray[i] -= withdrawalAmount;
 
@@ -322,5 +329,4 @@ public class projekBETA {
             }
         } while (menu != 0);
     }
-
 }
