@@ -7,6 +7,14 @@ public class projekBETA {
     static Locale localeID = new Locale("in", "ID");
     static NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
+    static double[] balanceArray = new double[100];
+    static double[] loanArray = new double[100];
+    static double[] remainingdebtArray = new double[100];
+    static double[] monthlyInstallmentsArray = new double[100];
+    static double[] monthlyInterestArray = new double[100];
+    static double[] totalDebttobePaidArray = new double[100];
+    static double[] remainingInstallmentsArray = new double[100];
+
     public static void main(String[] args) {
         int menu;
         String[] usernameArray = new String[100];
@@ -121,13 +129,15 @@ public class projekBETA {
 
     public static void loggedin() {
 
-        double[] balanceArray = new double[100];
-        double[] loanArray = new double[100];
-        double[] remainingdebtArray = new double[100];
-        double[] monthlyInstallmentsArray = new double[100];
-        double[] monthlyInterestArray = new double[100];
-        double[] totalDebttobePaidArray = new double[100];
-        double[] remainingInstallmentsArray = new double[100];
+        /*
+         * double[] balanceArray = new double[100];
+         * double[] loanArray = new double[100];
+         * double[] remainingdebtArray = new double[100];
+         * double[] monthlyInstallmentsArray = new double[100];
+         * double[] monthlyInterestArray = new double[100];
+         * double[] totalDebttobePaidArray = new double[100];
+         * double[] remainingInstallmentsArray = new double[100];
+         */
 
         int index = 0;
         boolean approval, tfBalance = false;
@@ -252,6 +262,8 @@ public class projekBETA {
                         double loanRepayment = input.nextDouble();
 
                         remainingInstallmentsArray[i] = totalDebttobePaidArray[i]
+                                - loanRepayment;
+                        totalDebttobePaidArray[i] = totalDebttobePaidArray[i]
                                 - loanRepayment;
                         // index++;
 
