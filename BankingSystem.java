@@ -33,6 +33,8 @@ public class BankingSystem {
     static double[] totalDebttobePaidArray = new double[100];
     static double[] remainingInstallmentsArray = new double[100];
     static double[] loanRepaymentArray = new double[100];
+
+    // TX History
     static String[] txTypeArray = new String[100];
     static double[] txAmountArray = new double[100];
 
@@ -40,7 +42,7 @@ public class BankingSystem {
     static int loanTerm, menu, month, loanApplication;
     static double interest = 0.005, remainingBalance = 0.0, monthlyInterest = 0.0, monthlyInstallments = 0.0,
             loanAmount = 0.0, remainingdebt = 0.0, totalDebttobePaid = 0.0, remainingInstallments = 0.0,
-            loanRepayment = 0.0;
+            loanRepayment = 0.0, showBalance = 0.0;
 
     static int txIndex = 0;
 
@@ -76,6 +78,11 @@ public class BankingSystem {
                     username = input.next();
                     System.out.print("Enter your password: ");
                     password = input.next();
+
+                    usernameArray[index] = username;
+                    passwordArray[index] = password;
+                    index++;
+
                     System.out.println("=====================================");
                     System.out.print("Enter your name: ");
                     name = input.next();
@@ -94,10 +101,6 @@ public class BankingSystem {
 
                     System.out.print("Enter your address: ");
                     address = input.next();
-
-                    usernameArray[index] = username;
-                    passwordArray[index] = password;
-                    index++;
 
                     String genderCard, male = "Male", female = "Female";
                     if (genderBolean == 1) {
@@ -149,7 +152,7 @@ public class BankingSystem {
                     break;
 
                 default:
-                    System.out.println("sorry cant help you");
+                    System.out.println("Sorry cant help you");
                     break;
             }
         } while (menu != 3);
@@ -192,13 +195,14 @@ public class BankingSystem {
                         remainingBalance = input.nextDouble();
                         System.out.println("\n== YOUR BALANCE ENTRY REQUEST HAS BEEN SUBMITTED ==");
                         balanceArray[index] = remainingBalance;
-
+                        index++;
                     } else if (tfBalance == false) {
                         remainingBalance = 0;
                         balanceArray[index] = remainingBalance;
+                        index++;
                     }
 
-                    index++;
+                    // index++;
                     txTypeArray[txIndex] = "Deposit";
                     txAmountArray[txIndex] = remainingBalance;
                     txIndex++;
@@ -223,7 +227,8 @@ public class BankingSystem {
 
                     if (approval == false) {
                         System.out.println("\n== THANK YOU ==\n");
-                        break;
+                        continue;
+                        // break;
                     }
 
                     remainingdebtArray[index] = remainingdebt;
@@ -256,7 +261,6 @@ public class BankingSystem {
                     txTypeArray[txIndex] = "Loan Application";
                     txAmountArray[txIndex] = loanAmount;
                     txIndex++;
-                    // index++;
                     break;
 
                 // LOAN REPAYMENT
@@ -284,29 +288,30 @@ public class BankingSystem {
                         System.out.print("Do you want to pay the loan bill? (true/false)");
                         tfRepayment = input.nextBoolean();
                         if (tfBalance == false) {
-                            continue;
+                            break;
+                        } else {
+
+                            System.out.print("How much you want to pay: Rp");
+                            loanRepayment = input.nextDouble();
+                            loanRepaymentArray[index] = loanRepayment;
+
+                            remainingInstallmentsArray[i] = totalDebttobePaidArray[i]
+                                    - loanRepayment;
+                            totalDebttobePaidArray[i] = totalDebttobePaidArray[i]
+                                    - loanRepayment;
+
+                            System.out.println("# Your installment payment has been received #");
+                            System.out.println("\r\n" + //
+                                    " =================================================================================== \r\n"
+                                    + //
+                                    "  The remaining loan that you have to pay now is:"
+                                    + formatRupiah.format(remainingInstallmentsArray[i]) + "\r\n" + //
+                                    " =================================================================================== \r\n"
+                                    + //
+                                    "\r\n" + //
+                                    "");
+                            System.out.println("== THANK YOU FOR PAYING THE INSTALLMENT ==\n");
                         }
-
-                        System.out.print("How much you want to pay: Rp");
-                        loanRepayment = input.nextDouble();
-                        loanRepaymentArray[index] = loanRepayment;
-
-                        remainingInstallmentsArray[i] = totalDebttobePaidArray[i]
-                                - loanRepayment;
-                        totalDebttobePaidArray[i] = totalDebttobePaidArray[i]
-                                - loanRepayment;
-
-                        System.out.println("# Your installment payment has been received #");
-                        System.out.println("\r\n" + //
-                                " =================================================================================== \r\n"
-                                + //
-                                "  The remaining loan that you have to pay now is:"
-                                + formatRupiah.format(remainingInstallmentsArray[i]) + "\r\n" + //
-                                " =================================================================================== \r\n"
-                                + //
-                                "\r\n" + //
-                                "");
-                        System.out.println("== THANK YOU FOR PAYING THE INSTALLMENT ==\n");
                     }
 
                     txTypeArray[txIndex] = "Loan Repayment";
@@ -314,7 +319,7 @@ public class BankingSystem {
                     txIndex++;
                     break;
 
-                // BALANCE CHECHK
+                // BALANCE CHECK
                 case 4:
                     System.out.println("\r\n" + //
                             "╔═══════════════╗\r\n" + //
@@ -324,9 +329,10 @@ public class BankingSystem {
                             "");
 
                     for (int i = 1; i < index; i++) {
+                        showBalance = loanArray[i] + balanceArray[i];
                         System.out.println("" + //
                                 " ============================================== \r\n" + //
-                                "  Account balance:" + formatRupiah.format(balanceArray[i]) + "\r\n" + //
+                                "  Account balance:" + formatRupiah.format(showBalance) + "\r\n" + //
                                 " ============================================== \r\n" + //
                                 "\r\n" + //
                                 "");
@@ -346,16 +352,13 @@ public class BankingSystem {
                     double withdrawalAmount = input.nextDouble();
 
                     for (int i = 1; i < index; i++) {
-                        if (balanceArray[i] >= withdrawalAmount) {
-                            balanceArray[i] -= withdrawalAmount;
-
-                            // txHistory[txIndex][0] = -withdrawalAmount; // Negative value for withdrawal
-                            // txIndex++;
+                        if (showBalance >= withdrawalAmount) {
+                            showBalance -= withdrawalAmount;
 
                             System.out.println("\r\n" + //
                                     " ========================================================================== \r\n" + //
                                     "  Withdrawal Successful! Your new balance is:"
-                                    + formatRupiah.format(balanceArray[i]) + "\r\n" + //
+                                    + formatRupiah.format(showBalance) + "\r\n" + //
                                     " ========================================================================== \r\n" + //
                                     "\r\n" + //
                                     "");
