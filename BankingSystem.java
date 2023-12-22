@@ -1,11 +1,28 @@
+
+/**
+ * Final project : Banking system 
+ * Group Member : 1. Bayu 
+ *                2. Hammam 
+ *                3. Ridho
+ * Class : TI 1I
+ */
+
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class projekBETA {
+public class BankingSystem {
     static Scanner input = new Scanner(System.in);
+
+    // Format rupiah
     static Locale localeID = new Locale("in", "ID");
     static NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+
+    // Var for register & login
+    static String[] usernameArray = new String[100];
+    static String[] passwordArray = new String[100];
+    static int age, genderBolean;
+    static String username, password, name, address, phonenumber;
 
     // MAIN FITURES VAR
     static double[] balanceArray = new double[100];
@@ -15,25 +32,21 @@ public class projekBETA {
     static double[] monthlyInterestArray = new double[100];
     static double[] totalDebttobePaidArray = new double[100];
     static double[] remainingInstallmentsArray = new double[100];
+    static double[] loanRepaymentArray = new double[100];
     static String[] txTypeArray = new String[100];
     static double[] txAmountArray = new double[100];
 
-    static double[][] txHistory = new double[100][100];
-
-    static int txHistoryCount = 0;
-    static boolean approval, tfBalance = false;
-    static int loanTerm, menu, month;
+    static boolean approval, tfBalance;
+    static int loanTerm, menu, month, loanApplication;
     static double interest = 0.005, remainingBalance = 0.0, monthlyInterest = 0.0, monthlyInstallments = 0.0,
-            loanAmount = 0.0, remainingdebt = 0.0, totalDebttobePaid = 0.0, remainingInstallments = 0.0;
+            loanAmount = 0.0, remainingdebt = 0.0, totalDebttobePaid = 0.0, remainingInstallments = 0.0,
+            loanRepayment = 0.0;
 
-    static int index = 0, txIndex = 0;
+    static int txIndex = 0;
 
+    // Main function
     public static void main(String[] args) {
-        int menu;
-        String[] usernameArray = new String[100];
-        String[] passwordArray = new String[100];
-        int age, genderBolean;
-        String username, password, name, address, phonenumber;
+        int menu, index = 0;
 
         // title
         System.out.println("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗\r\n" + //
@@ -43,7 +56,6 @@ public class projekBETA {
                 "╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗\r\n" + //
                 " ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝\r\n" + //
                 "                                                              ");
-        // title end
 
         do {
             System.out.println("\r\n" + //
@@ -131,6 +143,7 @@ public class projekBETA {
                     }
                     break;
 
+                // Exit
                 case 3:
                     System.out.println("Exiting...");
                     break;
@@ -143,6 +156,8 @@ public class projekBETA {
     }
 
     public static void loggedin() {
+        int index = 0;
+
         do {
             System.out.println("\r\n" + //
                     "+---------------------+\r\n" + //
@@ -172,19 +187,18 @@ public class projekBETA {
                     System.out.print("Do you want to input balance? (true/false): ");
                     tfBalance = input.nextBoolean();
 
-                    if (tfBalance) {
+                    if (tfBalance == true) {
                         System.out.print("The balance amount you want to input: Rp");
                         remainingBalance = input.nextDouble();
                         System.out.println("\n== YOUR BALANCE ENTRY REQUEST HAS BEEN SUBMITTED ==");
                         balanceArray[index] = remainingBalance;
-                        index++;
-                        txIndex++;
 
-                    } else {
+                    } else if (tfBalance == false) {
                         remainingBalance = 0;
                         balanceArray[index] = remainingBalance;
-                        index++;
                     }
+
+                    index++;
                     txTypeArray[txIndex] = "Deposit";
                     txAmountArray[txIndex] = remainingBalance;
                     txIndex++;
@@ -192,10 +206,6 @@ public class projekBETA {
 
                 // LOAN APPLICATION
                 case 2:
-                    if (tfBalance == false) {
-                        index++;
-                    }
-
                     System.out.println("\r\n" + //
                             "╔══════════════════╗\r\n" + //
                             "║ LOAN APPLICATION ║\r\n" + //
@@ -212,35 +222,18 @@ public class projekBETA {
                     approval = input.nextBoolean();
 
                     if (approval == false) {
-                        System.out.println("\n== LOAN REQUEST APPROVED ==");
-                        index++;
-                    } else
-                        continue;
-
-                    if (tfBalance) {
-                        // SAVE TO ARRAY
-                        remainingdebtArray[index] = remainingdebt;
-                        loanArray[index] = loanAmount;
-                        balanceArray[index] = remainingBalance;
-                        monthlyInterestArray[index] = monthlyInterest;
-                        remainingdebtArray[index] = remainingdebt;
-                        totalDebttobePaidArray[index] = totalDebttobePaid;
-                        monthlyInstallmentsArray[index] = monthlyInstallments;
-                        index++;
+                        System.out.println("\n== THANK YOU ==\n");
+                        break;
                     }
 
-                    if (tfBalance == false) {
-                        // SAVE TO ARRAY
-                        remainingBalance = 0;
-                        remainingdebtArray[index] = remainingdebt;
-                        loanArray[index] = loanAmount;
-                        balanceArray[index] = remainingBalance;
-                        monthlyInterestArray[index] = monthlyInterest;
-                        remainingdebtArray[index] = remainingdebt;
-                        totalDebttobePaidArray[index] = totalDebttobePaid;
-                        monthlyInstallmentsArray[index] = monthlyInstallments;
-                        index++;
-                    }
+                    remainingdebtArray[index] = remainingdebt;
+                    loanArray[index] = loanAmount;
+                    balanceArray[index] = remainingBalance;
+                    monthlyInterestArray[index] = monthlyInterest;
+                    remainingdebtArray[index] = remainingdebt;
+                    totalDebttobePaidArray[index] = totalDebttobePaid;
+                    monthlyInstallmentsArray[index] = monthlyInstallments;
+                    index++;
 
                     // CALCULATE
                     for (int i = 1; i < index; i++) {
@@ -257,6 +250,7 @@ public class projekBETA {
                                 "  The bill you have to pay per month amounts to "
                                 + formatRupiah.format(monthlyInstallmentsArray[i]) + "\r\n" + //
                                 " ======================================================================= ");
+
                         System.out.println("\n== THANK YOU ==\n");
                     }
                     txTypeArray[txIndex] = "Loan Application";
@@ -287,14 +281,15 @@ public class projekBETA {
                                 "");
 
                         boolean tfRepayment = true;
-                        System.out.println("Do you want to pay the loan bill?");
+                        System.out.print("Do you want to pay the loan bill? (true/false)");
                         tfRepayment = input.nextBoolean();
                         if (tfBalance == false) {
                             continue;
                         }
 
                         System.out.print("How much you want to pay: Rp");
-                        double loanRepayment = input.nextDouble();
+                        loanRepayment = input.nextDouble();
+                        loanRepaymentArray[index] = loanRepayment;
 
                         remainingInstallmentsArray[i] = totalDebttobePaidArray[i]
                                 - loanRepayment;
@@ -313,8 +308,9 @@ public class projekBETA {
                                 "");
                         System.out.println("== THANK YOU FOR PAYING THE INSTALLMENT ==\n");
                     }
+
                     txTypeArray[txIndex] = "Loan Repayment";
-                    txAmountArray[txIndex] = remainingInstallments;
+                    txAmountArray[txIndex] = loanRepayment;
                     txIndex++;
                     break;
 
@@ -327,11 +323,11 @@ public class projekBETA {
                             "" + //
                             "");
 
-                    for (int i = 0; i < index; i++) {
+                    for (int i = 1; i < index; i++) {
                         System.out.println("" + //
-                                " ========================================= \r\n" + //
+                                " ============================================== \r\n" + //
                                 "  Account balance:" + formatRupiah.format(balanceArray[i]) + "\r\n" + //
-                                " ========================================= \r\n" + //
+                                " ============================================== \r\n" + //
                                 "\r\n" + //
                                 "");
                     }
@@ -349,12 +345,12 @@ public class projekBETA {
                     System.out.print("Enter the amount of money you want to withdraw: Rp");
                     double withdrawalAmount = input.nextDouble();
 
-                    for (int i = 0; i < index; i++) {
+                    for (int i = 1; i < index; i++) {
                         if (balanceArray[i] >= withdrawalAmount) {
                             balanceArray[i] -= withdrawalAmount;
 
-                            txHistory[txIndex][0] = -withdrawalAmount; // Negative value for withdrawal
-                            txIndex++;
+                            // txHistory[txIndex][0] = -withdrawalAmount; // Negative value for withdrawal
+                            // txIndex++;
 
                             System.out.println("\r\n" + //
                                     " ========================================================================== \r\n" + //
